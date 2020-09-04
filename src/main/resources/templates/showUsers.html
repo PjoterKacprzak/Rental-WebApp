@@ -1,20 +1,44 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+
 <head>
+    <title>Show Users</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+
+<h2>List of Users</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Adress </th>
+        <th> Telephone </th>
+        <th> Roles </th>
+<!--        <th> Authorities </th>-->
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="client : ${clients}">
+        <td><span th:text="${client.username}"> Name </span></td>
+        <td><span th:text="${client.email}"> Email </span></td>
+        <td><span th:text="${client.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>
+        <td><span th:text="${client.telephone}"> Telephone </span></td>
+        <td><span th:text="${client.roles}"> Roles </span></td>
+<!--        <td><span th:text="${client.authorities}"> Authorities </span></td>-->
+    </tr>
+    </tbody>
+</table>
 <form action="/logout" method="get" >
-    <a href="/logout">
-
-        
-        <button name="Logout" type="submit" value="Logout">Logout</button>
-
-    </a>
+    <button name="Logout" type="submit" value="Logout">Logout</button>
 </form>
-
 </body>
 </html>
+

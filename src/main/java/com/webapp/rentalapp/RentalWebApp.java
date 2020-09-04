@@ -28,12 +28,5 @@ public class RentalWebApp implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-
-        Client client =new Client();
-
-
-        client.setPassword(passwordEncoder.encode("Piotr"));
-        client.setUserName(("Piotr"));
-        clientRepository.save(client);
     }
 }
