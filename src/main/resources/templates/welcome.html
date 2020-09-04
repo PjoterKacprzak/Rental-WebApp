@@ -10,15 +10,15 @@
 </head>
 <body>
 Welcome user!<br>
-<div sec:authorize="isAuthenticated()">
-	This content is only shown to authenticated users.
-</div>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-	This content is only shown to administrators.
-</div>
-<div sec:authorize="hasRole('ROLE_USER')">
-	This content is only shown to users.
-</div>
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--	This content is only shown to authenticated users.-->
+<!--</div>-->
+<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--	This content is only shown to administrators.-->
+<!--</div>-->
+<!--<div sec:authorize="hasRole('ROLE_USER')">-->
+<!--	This content is only shown to users.-->
+<!--</div>-->
 <form action="/logout" method="get" >
 	<a href="/logout">
 
@@ -26,6 +26,11 @@ Welcome user!<br>
 
 	</a>
 </form>
+	<div>
+		<a href="/editUser">
+			<button namme="editUser">Change data</button>
+		</a>
+	</div>
 
 </body>
 </html>

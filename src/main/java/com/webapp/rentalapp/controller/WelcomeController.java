@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -71,6 +71,12 @@ public class WelcomeController {
 	{
 		logger.info(String.valueOf(request.isUserInRole("ROLE_ADMIN")));
 		return "showUsers";
+	}
+
+	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
+	public String editUserData(Model model)
+	{
+		return "editUser.html";
 	}
 }
 
