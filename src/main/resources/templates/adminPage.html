@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+</head>
+<body>
+You Are Admin<br>
+
+<form action="/admin/showUsers" method="get">
+    <button  type="submit">Show Users</button><br>
+</form>
+<form action="/logout" method="get" >
+    <a href="/adminPage">
+        <button name="ShowUser">Delete User</button><br>
+    </a>
+    <a href="/adminPage">
+        <button name="ShowUser">Add User</button><br>
+    </a>
+
+        <button name="Logout" type="submit" value="Logout">Logout</button><br>
+</form>
+</body>
+</html>
