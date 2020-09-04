@@ -10,27 +10,16 @@
 </head>
 <body>
 Welcome user!<br>
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--	This content is only shown to authenticated users.-->
-<!--</div>-->
-<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--	This content is only shown to administrators.-->
-<!--</div>-->
-<!--<div sec:authorize="hasRole('ROLE_USER')">-->
-<!--	This content is only shown to users.-->
-<!--</div>-->
-<form action="/logout" method="get" >
-	<a href="/logout">
 
-		<button name="Logout" type="submit" value="Logout">Logout</button>
-
+<form action="/welcome/showDb" method="get" >
+		<button name="showDB" type="submit" value="showDB">Things u Can Rent!</button>
 	</a>
 </form>
-	<div>
-		<a href="/editUser">
-			<button namme="editUser">Change data</button>
-		</a>
-	</div>
+
+
+<form action="/logout" method="get" >
+		<button name="Logout" type="submit" value="Logout">Logout</button>
+</form>
 
 </body>
 </html>

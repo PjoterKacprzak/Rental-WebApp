@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+
+<head>
+    <title>Show Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h2>Things u Can Rent</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> Type </th>
+        <th> Price </th>
+        <th> Quantity </th>
+        <th> Mark </th>
+        <!--        <th> Authorities </th>-->
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="equipments : ${equipment}">
+        <td><span th:text="${equipments.eqName}"> Name </span></td>
+        <td><span th:text="${equipments.eqType}"> Type </span></td>
+        <td><span th:text="${equipments.price}"> Price&nbsp;&nbsp;&nbsp; </span></td>
+        <td><span th:text="${equipments.quantity}"> Quantity </span></td>
+        <td><span th:text="${equipments.eqMark}"> Mark </span></td>
+        <!--        <td><span th:text="${client.authorities}"> Authorities </span></td>-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+

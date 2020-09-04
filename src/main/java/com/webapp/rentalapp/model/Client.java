@@ -1,5 +1,6 @@
 package com.webapp.rentalapp.model;
 
+import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,17 +17,23 @@ public class Client implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String email;
+    @NotNull
     private String adress;
+    @NotNull
     private String telephone;
 
     public Client() { }
     public Client(String username,String password,String email,String adress, String telephone) {
         this.username=username;
         this.password=password;
-        this.email="piotr@gmail.com";
+        this.email="No Data";
         this.adress="Not Data";
         this.telephone="No Data";
 
@@ -103,4 +110,19 @@ public class Client implements UserDetails {
     }
 
 
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }

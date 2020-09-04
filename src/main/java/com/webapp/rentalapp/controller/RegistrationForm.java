@@ -1,6 +1,7 @@
 package com.webapp.rentalapp.controller;
 
 
+import com.sun.istack.NotNull;
 import com.webapp.rentalapp.model.Client;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -12,11 +13,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Data
 public class RegistrationForm {
 
-
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String email;
+    @NotNull
     private String adress;
+    @NotNull
     private String telephone;
 
 

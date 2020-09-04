@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 @Controller
@@ -23,6 +26,9 @@ public class WelcomeController {
 
 	@Autowired
 	ClientRepository clientRepository;
+
+	@Autowired
+	EquipmentRepository equipmentRepository;
 
 	@Autowired
 	MyUserDetailsService myUserDetailsService;
@@ -61,22 +67,32 @@ public class WelcomeController {
 		return "login";
 	}
 
+	//Users Controllers
+	@RequestMapping("/welcome/showDb")
+	public String showRentalDB(Model model	,SecurityContextHolderAwareRequestWrapper request) {
+
+		model.addAttribute("equipment", equipmentRepository.findAll());
+		return "rentalDB";
+	}
+
+
+
+
+
+	//Admin Controllers
 	@RequestMapping("/admin")
 	public String admin() {
 		return "adminPage";
 	}
 
 	@RequestMapping("/admin/showUsers")
-	public String adminPage(SecurityContextHolderAwareRequestWrapper request)
-	{
-		logger.info(String.valueOf(request.isUserInRole("ROLE_ADMIN")));
-		return "showUsers";
-	}
+	public String getCountries(Model model	,SecurityContextHolderAwareRequestWrapper request) {
 
-	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public String editUserData(Model model)
-	{
-		return "editUser.html";
+
+
+		model.addAttribute("clients", clientRepository.findAll());
+		logger.info(String.valueOf(model));
+		return "showUsers";
 	}
 }
 
