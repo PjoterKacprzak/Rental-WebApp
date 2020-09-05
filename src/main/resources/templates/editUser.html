@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,11 +10,12 @@
 
 <div >
     <h1>Edit User</h1>
-    <form action="#" th:action="@{/updateUser}" th:object="${clients}"
+    <form action="#" th:action="@{/updateUser}" th:object="${getClient}"
           method="post">
-        <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{username}"/>
-        <input type="hidden" th:field="*{password}"/>
+        <input type="hidden" th:field="*{id}" />-->
+<!--        <input type="hidden" th:field="${clients}"  name="clients">-->
+        <input type="text" th:field="*{username}"/>
+        <input type="text" th:field="*{password}"/>
 
         <input type="text" th:field="*{email}"/>
         <input type="text" th:field="*{adress}"/>

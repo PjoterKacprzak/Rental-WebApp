@@ -100,14 +100,6 @@ public class Client implements UserDetails {
 
 
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", userName='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 
 
     public String getAdress() {
@@ -124,5 +116,18 @@ public class Client implements UserDetails {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", adress='" + adress + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

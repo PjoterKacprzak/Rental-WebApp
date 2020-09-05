@@ -4,18 +4,20 @@ import com.webapp.rentalapp.model.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -41,20 +43,24 @@ public class WelcomeController {
 		logger.info(String.valueOf(request.isUserInRole("ROLE_ADMIN")));
 
 		logger.info(String.valueOf(request.getUserPrincipal()));
-		if(request.isUserInRole("ROLE_ADMIN"))
-		{
+		if (request.isUserInRole("ROLE_ADMIN")) {
 			return "adminPage";
+		} else {
+
+			return "welcome";
 		}
-		return "welcome";
+
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login( SecurityContextHolderAwareRequestWrapper request) {
+	public String login(SecurityContextHolderAwareRequestWrapper request) {
 		return "login";
 	}
 
 	@RequestMapping("/logout")
-	public String logout() { return "logout.html"; }
+	public String logout() {
+		return "logout";
+	}
 
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -62,73 +68,74 @@ public class WelcomeController {
 		model.addAttribute("clientForm", new Client());
 		return "registration";
 	}
+
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String processRegistration( RegistrationForm form) {
+	public String processRegistration(RegistrationForm form) {
 
 		logger.info(form.toString());
 		clientRepository.save(form.toClient(bCryptPasswordEncoder));
 		return "login";
 	}
 
-	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public String updateUserData(@ModelAttribute("client") Client client){
-		clientRepository.save(client);
-		return "redirect:/";
-	}
 
-	//Users Controllers
+	////////////////////Users Controllers///////////////////////////////
 	@RequestMapping("/welcome/showDb")
-	public String showRentalDB(Model model	,SecurityContextHolderAwareRequestWrapper request) {
+	public String showRentalDB(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
 		model.addAttribute("equipment", equipmentRepository.findAll());
 		return "rentalDB";
 	}
-	//Currently not used
-//	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-////	public  String currentData(MyUserDetailsService myUserDetailsService, Model model, SecurityContextHolderAwareRequestWrapper request){
-//	public  String currentData(Model model	,SecurityContextHolderAwareRequestWrapper request){
-//
-//		System.out.println(request.getUserPrincipal());
-//		model.addAttribute("clients",clientRepository.findByUsername(request.getRemoteUser()));
-//		logger.info(String.valueOf(model));
-////		myUserDetailsService.loadUserByUsername(request.getRemoteUser());
-//		return "editUser";
-//	}
-//
-//	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-//	public  String updatedData(){
-////		myUserDetailsService.loadUserByUsername(request.getRemoteUser());
-//		return "welcome";
-//	}
 
-	//Admin Controllers
+
+	/////////////////////Admin Controllers//////////////////////////
 	@RequestMapping("/admin")
 	public String admin() {
 		return "adminPage";
 	}
 
 	@RequestMapping("/admin/showUsers")
-	public String getCountries(Model model	, SecurityContextHolderAwareRequestWrapper request) {
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		System.out.println(request.getRemoteUser());
-//		System.out.println(auth.getDetails().toString());
-//		System.out.println(request.getUserPrincipal());
-//		System.out.println(request.getUserPrincipal().getName());
+	public String getCountries(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
 		model.addAttribute("clients", clientRepository.findAll());
 		logger.info(String.valueOf(model));
 		return "showUsers";
 	}
 
-	@RequestMapping("/editUsers/{id}")
-	public String editUserPage(@PathVariable long id, Model model) {
-		Client client = clientRepository.getOne(id);
-		model.addAttribute("clients",client);
+
+	@RequestMapping(value = "/editUsers/{username}", method = RequestMethod.GET)
+	public String editUserPage(@PathVariable String username, Model model) {
+
+		Client client = clientRepository.findByUsername(username);
+		model.addAttribute("getClient", client);
 		logger.info(String.valueOf(model));
 		return "editUser";
 	}
 
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public String updateUserData(@ModelAttribute("getClient") Client string) {
+
+		logger.info(string.toString());
+		String username = clientRepository.findByIds(string.getId());
+		Client test = clientRepository.findByUsername(username);
+		logger.info(test.toString());
+		Long id = test.getId();
+
+		if (string.getAdress() != "" || string.getAdress() != null) {
+			clientRepository.saveAdress(string.getAdress(), id);
+		}
+		if (string.getTelephone() != "") {
+			clientRepository.saveTelephone(string.getTelephone(), id);
+		}
+		if (string.getEmail() != "") {
+			clientRepository.saveEmail(string.getEmail(), id);
+		}
+
+		return "redirect:/";
+	}
 }
+
+
 
 //TODO Wszystkie html są do ujednolicenia żeby łatwiej się robiło frontend!
 //FIXME Edycja Prawie działa:
