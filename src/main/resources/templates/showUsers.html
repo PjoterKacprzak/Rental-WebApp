@@ -32,6 +32,7 @@
         <td><span th:text="${client.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>
         <td><span th:text="${client.telephone}"> Telephone </span></td>
         <td><span th:text="${client.roles}"> Roles </span></td>
+        <td><a th:href="'/editUsers/'+${client.id}">Edit</a></td>
 <!--        <td><span th:text="${client.authorities}"> Authorities </span></td>-->
     </tr>
     </tbody>

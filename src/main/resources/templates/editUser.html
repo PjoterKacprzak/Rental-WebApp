@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
+<div >
+    <h1>Edit User</h1>
+    <form action="#" th:action="@{/updateUser}" th:object="${clients}"
+          method="post">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{username}"/>
+        <input type="hidden" th:field="*{password}"/>
+
+        <input type="text" th:field="*{email}"/>
+        <input type="text" th:field="*{adress}"/>
+        <input type="text" th:field="*{telephone}"/>
+<!--        <input type="text" th:field="*{roles}">-->
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th> Name </th>-->
+<!--        <th> Email </th>-->
+<!--        <th> Adress </th>-->
+<!--        <th> Telephone </th>-->
+<!--        <th> Roles </th>-->
+<!--        &lt;!&ndash;        <th> Authorities </th>&ndash;&gt;-->
+
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+
+<!--    <tr th:each="client : ${clients}">-->
+<!--        <td><span th:text="${clients.username}"> Name </span></td>-->
+<!--        <td><span th:text="${clients.email}"> Email </span></td>-->
+<!--        <td><span th:text="${clients.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>-->
+<!--        <td><span th:text="${clients.telephone}"> Telephone </span></td>-->
+<!--        <td><span th:text="${clients.roles}"> Roles </span></td>-->
+<!--        &lt;!&ndash;        <td><span th:text="${client.authorities}"> Authorities </span></td>&ndash;&gt;-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
 </body>
 </html>
