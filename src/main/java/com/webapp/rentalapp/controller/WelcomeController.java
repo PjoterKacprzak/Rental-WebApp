@@ -4,26 +4,34 @@ import com.webapp.rentalapp.model.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.sql.*;
 
 
 @Controller
 public class WelcomeController {
 	private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
+	public void DataBases()
+	{
+		try {
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+			String connectionUrl = "jdbc:mysql://localhost:3306/Construction_Rental?serverTimezone=UTC&useLegacyDatetimeCode=false";
+			Connection link = DriverManager.getConnection(connectionUrl);
+		}catch (ClassNotFoundException e){
+			System.out.println("class not foung");
+		}
+
+		catch (SQLException e){
+			System.out.println("Bad Connections");
+		};
+
+	}
 
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -132,6 +140,58 @@ public class WelcomeController {
 		}
 
 		return "redirect:/";
+	}
+
+	//Adding new user
+	@RequestMapping(value = "/admin/showUser/newUser", method = RequestMethod.GET)
+	public String newUser(Model model) {
+
+		Client newClient =new Client();
+		model.addAttribute("newClient",newClient);
+		return "newUser";
+	}
+	@RequestMapping(value = "/admin/showUser/newUser/confirm", method = RequestMethod.POST)
+	public String newUserConfirm(@ModelAttribute(value = "newClient") Client newClient,@ModelAttribute(value = "isAdmin") boolean isAdmin) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connectionUrl = "jdbc:mysql://localhost:3306/Construction_Rental?serverTimezone=UTC&useLegacyDatetimeCode=false";
+			Connection link = DriverManager.getConnection(connectionUrl,"TestUser","Anakonda-1");
+			Statement statement= link.createStatement();
+			newClient.setPassword(bCryptPasswordEncoder.encode(newClient.getPassword()));
+			clientRepository.save(newClient);
+			if(isAdmin)
+			{
+				try {
+					logger.info(newClient.getId().toString());
+					PreparedStatement stmt=link.prepareStatement("Insert into clients_roles(user_id,role_id) values("+newClient.getId()+",1)");
+					stmt.executeUpdate();
+
+				}catch (SQLException e){
+					System.out.println("Bad Query!");}
+			}
+			else {
+				try {
+					clientRepository.save(newClient);
+					PreparedStatement stmt=link.prepareStatement("Insert into clients_roles(user_id,role_id) values("+newClient.getId()+",3)");
+
+					//statement.execute("Insert into clients_roles(user_id,role_id) values(5,1)");
+				} catch (SQLException e) {
+					System.out.println("Bad Query!");
+				}
+			}
+
+
+
+
+//		}catch (ClassNotFoundException e){
+//			System.out.println("class not found");
+		}
+
+		catch (SQLException | ClassNotFoundException e){
+			System.out.println("Bad Connections");
+		};
+		return "redirect:/admin/showUsers";
 	}
 }
 

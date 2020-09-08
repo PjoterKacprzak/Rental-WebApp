@@ -46,6 +46,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
 
 
+
 }
 //
 //    @Query("INSERT ?1 INTO Client u WHERE u.id = ?1")

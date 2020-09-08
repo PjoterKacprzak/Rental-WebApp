@@ -39,7 +39,7 @@ public class RegistrationForm {
         logger.debug(username);
         logger.info(password);
         logger.info(password);
-        return new Client(username,bCryptPasswordEncoder.encode(password),email,adress,telephone);
+        return new Client(username,bCryptPasswordEncoder.encode(password));
     }
 
 

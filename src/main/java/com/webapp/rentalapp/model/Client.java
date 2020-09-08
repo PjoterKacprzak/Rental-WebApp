@@ -30,7 +30,7 @@ public class Client implements UserDetails {
     private String telephone;
 
     public Client() { }
-    public Client(String username,String password,String email,String adress, String telephone) {
+    public Client(String username,String password) {
         this.username=username;
         this.password=password;
         this.email="No Data";
@@ -68,8 +68,8 @@ public class Client implements UserDetails {
     public String getUsername() {
         return username;
     }
-    public void setUserName(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
