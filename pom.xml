@@ -12,7 +12,7 @@
     <artifactId>rental-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>rental-app</name>
-    <description>Construction equipment Rental Web App with Spring Boot,Spring Security and Hibernate</description>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>
@@ -82,12 +82,31 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
+        <!-- Boostrap-->
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.5.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>popper.js</artifactId>
+            <version>1.16.1</version>
+        </dependency>
+
+    <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>RELEASE</version>
+        <scope>compile</scope>
+    </dependency>
+
     </dependencies>
 
     <build>
