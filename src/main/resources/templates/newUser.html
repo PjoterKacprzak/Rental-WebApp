@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header">
 </head>
+
 <body>
-
-
-
-<div >
+<div>
     <h1>Add new User</h1>
     <form action="#" th:action="@{/admin/showUser/newUser/confirm}" th:object="${newClient}"
           method="post">

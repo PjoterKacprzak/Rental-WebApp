@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header">
 </head>
+
 <body>
 
-<div >
+<div>
     <h1>Edit User</h1>
     <form action="#" th:action="@{/updateUser}" th:object="${getClient}"
           method="post">
 
-        <input type="hidden" th:field="*{id}" >
-<!--        <input type="hidden" th:field="${clients}"  name="clients">-->
+        <input type="hidden" th:field="*{id}">
+        <!--        <input type="hidden" th:field="${clients}"  name="clients">-->
         UserName&nbsp;&nbsp; <input type="text" th:field="*{username}"/><br>
 
         Password&nbsp;&nbsp; <input type="text" th:field="*{password}"/><br>
@@ -22,7 +21,7 @@
         E-Mail&nbsp;&nbsp;<input type="text" th:field="*{email}"/><br>
         Adress&nbsp;&nbsp;<input type="text" th:field="*{adress}"/><br>
         Telephone&nbsp;&nbsp;<input type="text" th:field="*{telephone}"/><br>
-<!--        <input type="text" th:field="*{roles}">-->
+        <!--        <input type="text" th:field="*{roles}">-->
         <button type="submit">Save</button>
     </form>
 </div>

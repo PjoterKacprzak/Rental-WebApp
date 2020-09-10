@@ -46,22 +46,24 @@ public class WelcomeController {
 	MyUserDetailsService myUserDetailsService;
 
 	@RequestMapping("/")
-	public String welcome(SecurityContextHolderAwareRequestWrapper request) {
+	public String welcome(SecurityContextHolderAwareRequestWrapper request, Model model) {
 
 		logger.info(String.valueOf(request.isUserInRole("ROLE_ADMIN")));
 
 		logger.info(String.valueOf(request.getUserPrincipal()));
 		if (request.isUserInRole("ROLE_ADMIN")) {
+			model.addAttribute("title","Admin Page");
 			return "adminPage";
 		} else {
-
+			model.addAttribute("title","Welcome User");
 			return "welcome";
 		}
 
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(SecurityContextHolderAwareRequestWrapper request) {
+	public String login(SecurityContextHolderAwareRequestWrapper request, Model model) {
+		model.addAttribute("title","Login");
 		return "login";
 	}
 
@@ -74,6 +76,7 @@ public class WelcomeController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
 		model.addAttribute("clientForm", new Client());
+		model.addAttribute("title", "Registration");
 		return "registration";
 	}
 
@@ -90,7 +93,7 @@ public class WelcomeController {
 	////////////////////Users Controllers///////////////////////////////
 	@RequestMapping("/welcome/showDb")
 	public String showRentalDB(Model model, SecurityContextHolderAwareRequestWrapper request) {
-
+		model.addAttribute("title","Show equipment");
 		model.addAttribute("equipment", equipmentRepository.findAll());
 		return "rentalDB";
 	}
@@ -104,7 +107,7 @@ public class WelcomeController {
 
 	@RequestMapping("/admin/showUsers")
 	public String getCountries(Model model, SecurityContextHolderAwareRequestWrapper request) {
-
+		model.addAttribute("title","Show Users");
 		model.addAttribute("clients", clientRepository.findAll());
 		logger.info(String.valueOf(model));
 		return "showUsers";
@@ -116,6 +119,7 @@ public class WelcomeController {
 
 		Client client = clientRepository.findByUsername(username);
 		model.addAttribute("getClient", client);
+		model.addAttribute("title", "Edit user");
 		logger.info(String.valueOf(model));
 		return "editUser";
 	}
@@ -148,6 +152,7 @@ public class WelcomeController {
 
 		Client newClient =new Client();
 		model.addAttribute("newClient",newClient);
+		model.addAttribute("title","Add new User");
 		return "newUser";
 	}
 	@RequestMapping(value = "/admin/showUser/newUser/confirm", method = RequestMethod.POST)

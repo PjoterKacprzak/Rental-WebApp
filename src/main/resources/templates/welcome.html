@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: header">
 </head>
+
 <body>
 Welcome user!<br>
-
 <form action="/welcome/showDb" method="get" >
 		<button name="showDB" type="submit" value="showDB">Things u Can Rent!</button>
 	</a>
