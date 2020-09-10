@@ -31,7 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
         Client client = clientRepository.findByUsername(username);
         if(client==null) {
             throw new UsernameNotFoundException("No Username in DataBase"); }
-        return new org.springframework.security.core.userdetails.User(client.getPassword(),client.getPassword(),getAuthorities(client));
+        return new org.springframework.security.core.userdetails.User(client.getUsername(),client.getPassword(),getAuthorities(client));
     }
 
     private static Collection<?extends GrantedAuthority> getAuthorities(Client client){

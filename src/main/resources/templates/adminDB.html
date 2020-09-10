@@ -13,16 +13,16 @@
 <h2>Things u Can Rent</h2>
 
 <form th:method="post"
-name="variable">
+      name="variable">
     <table>
         <thead>
         <tr>
-                    <th> Name </th>
-                    <th> Type </th>
-                    <th> Price </th>
-                    <th> Quantity </th>
-                    <th> Mark </th>
-                    <th> Status </th>
+            <th> Name </th>
+            <th> Type </th>
+            <th> Price </th>
+            <th> Quantity </th>
+            <th> Mark </th>
+            <th> Status </th>
         </tr>
         </thead>
         <tbody>
@@ -34,15 +34,15 @@ name="variable">
             <td <span th:text="${equipment.quantity}"> Quantity</span></td>
             <td <span th:text="${equipment.eqMark}"> Mark </span></td>
             <td <span th:text="${equipment.status}"> Status </span></td>
-            <td><a th:href="'/user/addtocart/'+${equipment.id}">
-                <input type="button" value="Add to Cart"><br>
-            </a></td>
+<!--            <td><a th:href="'/user/addtocart/'+${equipment.id}">-->
+<!--                <input type="button" value="Add to Cart"><br>-->
+<!--            </a></td>-->
         </tr>
         </tbody>
     </table>
 
-    <a href="/user/showcart/" >
-        <input type="button" value="Your cart">
+    <a href="/admin/showDb/orders" >
+        <input type="button" value="Orders">
     </a>
 
 

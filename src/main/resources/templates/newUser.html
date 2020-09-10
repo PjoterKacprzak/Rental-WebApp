@@ -14,16 +14,12 @@
     <h1>Add new User</h1>
     <form action="#" th:action="@{/admin/showUser/newUser/confirm}" th:object="${newClient}"
           method="post">
-<!--        ID<input type="text" th:field="${newClient.id}" >-->
         UserName&nbsp;&nbsp; <input type="text" th:field="*{username}"/><br>
-
         Password&nbsp;&nbsp; <input type="text" th:field="*{password}"/><br>
-
         E-Mail&nbsp;&nbsp;&nbsp;<input type="text" th:field="*{email}"/><br>
         Adress&nbsp;&nbsp;&nbsp;<input type="text" th:field="*{adress}"/><br>
         Telephone&nbsp;&nbsp;<input type="text" th:field="*{telephone}"/><br>
-        <!--        <input type="text" th:field="*{roles}">-->
-        Admin <input type="checkbox" name="isAdmin">
+        Role(admin/user)&nbsp;&nbsp;<input type="text" name="role"/><br>
         <button type="submit">Save</button>
     </form>
 </div>

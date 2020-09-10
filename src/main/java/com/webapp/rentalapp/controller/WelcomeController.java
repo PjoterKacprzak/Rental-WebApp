@@ -1,9 +1,14 @@
 package com.webapp.rentalapp.controller;
 
 import com.webapp.rentalapp.model.Client;
+import com.webapp.rentalapp.model.Equipment;
+import com.webapp.rentalapp.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
+import java.util.Iterator;
+import java.util.List;
 
 
 @Controller
@@ -38,6 +45,9 @@ public class WelcomeController {
 
 	@Autowired
 	ClientRepository clientRepository;
+
+	@Autowired
+	OrderRepository orderRepository;
 
 	@Autowired
 	EquipmentRepository equipmentRepository;
@@ -88,20 +98,71 @@ public class WelcomeController {
 
 
 	////////////////////Users Controllers///////////////////////////////
-	@RequestMapping("/welcome/showDb")
-	public String showRentalDB(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
-		model.addAttribute("equipment", equipmentRepository.findAll());
+	//Show DB to rent
+	@RequestMapping(value = "user/showdb",method = RequestMethod.GET)
+	public String showRentalDB(Model model) {
+
+		List<Equipment> test=equipmentRepository.findAllByStatusAvailable();
+
+		model.addAttribute("equipments",test);
 		return "rentalDB";
 	}
 
+	@RequestMapping(value = "user/addtocart/{id}",method = RequestMethod.GET)
+	public String addToCart(@PathVariable Long id, Model model, Authentication authentication)
+	{
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+		Order order	= new Order(equipmentRepository.findByID(id),username);
+		equipmentRepository.setStatusToInCart(id);
+		orderRepository.save(order);
+
+		return "redirect:/user/showdb";
+	}
+
+	@RequestMapping(value = "user/showcart",method = RequestMethod.GET)
+			public String showCart(Model model,Authentication authentication)
+	{
+			model.addAttribute("pendingEquipments",orderRepository.findByNameAndStatus(authentication.getName()));
+
+		return "showCart";
+	}
+
+	@RequestMapping(value = "user/showcart/confirm")
+	public String showCartConfirm(Authentication authentication){
+
+
+
+
+		List<Order> ordersInCart = orderRepository.findAllByStatusInCart(authentication.getName());
+Order order;
+		Long id;
+		for(int i=0;i<ordersInCart.size();i++)
+		{
+			id=ordersInCart.get(i).getId();
+			order = orderRepository.findById(id);
+		order.getEquipment().setStatus(Equipment.EquipmentStatus.pending);
+		orderRepository.save(order);
+		}
+
+		return "welcome";
+	}
+
+
 
 	/////////////////////Admin Controllers//////////////////////////
+
 	@RequestMapping("/admin")
 	public String admin() {
 		return "adminPage";
 	}
-
 	@RequestMapping("/admin/showUsers")
 	public String getCountries(Model model, SecurityContextHolderAwareRequestWrapper request) {
 
@@ -110,7 +171,7 @@ public class WelcomeController {
 		return "showUsers";
 	}
 
-
+	//Edit Existining user as admin
 	@RequestMapping(value = "/editUsers/{username}", method = RequestMethod.GET)
 	public String editUserPage(@PathVariable String username, Model model) {
 
@@ -119,7 +180,6 @@ public class WelcomeController {
 		logger.info(String.valueOf(model));
 		return "editUser";
 	}
-
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String updateUserData(@ModelAttribute("getClient") Client string) {
 
@@ -151,7 +211,7 @@ public class WelcomeController {
 		return "newUser";
 	}
 	@RequestMapping(value = "/admin/showUser/newUser/confirm", method = RequestMethod.POST)
-	public String newUserConfirm(@ModelAttribute(value = "newClient") Client newClient,@ModelAttribute(value = "isAdmin") boolean isAdmin) {
+	public String newUserConfirm(@ModelAttribute(value = "newClient") Client newClient,@ModelAttribute(value = "role") String role) {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -160,7 +220,7 @@ public class WelcomeController {
 			Statement statement= link.createStatement();
 			newClient.setPassword(bCryptPasswordEncoder.encode(newClient.getPassword()));
 			clientRepository.save(newClient);
-			if(isAdmin)
+			if(role.equals("admin")|| role.equals("Admin"))
 			{
 				try {
 					logger.info(newClient.getId().toString());
@@ -174,30 +234,50 @@ public class WelcomeController {
 				try {
 					clientRepository.save(newClient);
 					PreparedStatement stmt=link.prepareStatement("Insert into clients_roles(user_id,role_id) values("+newClient.getId()+",3)");
+					stmt.executeUpdate();
 
-					//statement.execute("Insert into clients_roles(user_id,role_id) values(5,1)");
 				} catch (SQLException e) {
 					System.out.println("Bad Query!");
 				}
 			}
-
-
-
-
-//		}catch (ClassNotFoundException e){
-//			System.out.println("class not found");
-		}
-
-		catch (SQLException | ClassNotFoundException e){
+		} catch (SQLException | ClassNotFoundException e){
 			System.out.println("Bad Connections");
 		};
 		return "redirect:/admin/showUsers";
 	}
+
+	//deleting user
+	@RequestMapping(value = "/deleteUser/{username}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable String username, Model model) {
+
+		clientRepository.delete(clientRepository.findByUsername(username));
+		return "redirect:/admin/showUsers";
+	}
+
+	//Rental features
+
+	@RequestMapping(value = "/admin/showDb")
+	public String showAdminDB(Model model)
+	{
+		List<Equipment> equipment=equipmentRepository.findAll();
+		model.addAttribute("equipments",equipment);
+		return "adminDB";
+	}
+
+	@RequestMapping(value = "/admin/showDb/orders")
+	public String showAdminOrders(Model model)
+	{
+		List<Order> orders=orderRepository.findOnlyByStatusPending();
+		model.addAttribute("orders",orders);
+		return "adminOrders";
+	}
+
+	@RequestMapping(value = "/admin/showDb/orders/confirm/{id}",method = RequestMethod.GET)
+	public String showAdminOrdersConfirm(@PathVariable Long id, Model model)
+	{
+		Order order = orderRepository.findById(id);
+		order.getEquipment().setStatus(Equipment.EquipmentStatus.accepted);
+		orderRepository.save(order);
+		return "redirect:/admin/showDb/orders";
+	}
 }
-
-
-
-//TODO Wszystkie html są do ujednolicenia żeby łatwiej się robiło frontend!
-//FIXME Edycja Prawie działa:
-// - znika imię - pewnie przez to że jest jako hasło gdzieś tam w tej pamięci
-// - pierdoli się rola, jak jest przesyłana taka sama jak była to się zeruje a jak wstawiam 1,2,3 to wywala błędy

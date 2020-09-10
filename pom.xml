@@ -12,7 +12,7 @@
     <artifactId>rental-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>rental-app</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Construction equipment Rental Web App with Spring Boot,Spring Security and Hibernate</description>
 
     <properties>
         <java.version>11</java.version>
@@ -81,6 +81,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -24,19 +24,19 @@ insert into clients_roles(user_id,role_id) values
 
 
 
-insert into equipments(id,eq_name,eq_type,eq_mark,price,quantity) values
-(1,'excavator 453T','excavator','volvo',33.12,2),
-(2,'excavator RTDFG445','excavator','renault',30.4,1),
-(3,'roller BP/34','roller','volvo',19.3,4),
-(4,'roller TJG/44','roller','renault',33.3,1),
-(5,'mixer WOW','mixer','stihl',10.12,2),
-(6,'mixer BiggestWOW','mixer','stihl',5.12,2),
-(10,'generator SS-Power','generator', 'sumera',78,5),
-(11,'generator Deb2','generator', 'stanley',84.32,7),
-(12,'forklift 21-C','forklift', 'hyster',114.25,12),
-(13,'forklift 72','forklift', 'linde',140.00,11),
-(14,'jackhammer daisy','jackhammer', 'makita',45.00,18),
-(15,'jackhammer C4ZYG4Y','jackhammer', 'bosch',65.50,24);
+insert into equipments(id,eq_name,eq_type,eq_mark,price,quantity,status) values
+(1,'excavator 453T','excavator','volvo',33.12,2,'available'),
+(2,'excavator RTDFG445','excavator','renault',30.4,1,'available'),
+(3,'roller BP/34','roller','volvo',19.3,4,'available'),
+(4,'roller TJG/44','roller','renault',33.3,1,'available'),
+(5,'mixer WOW','mixer','stihl',10.12,2,'available'),
+(6,'mixer BiggestWOW','mixer','stihl',5.12,2,'available'),
+(10,'generator SS-Power','generator', 'sumera',78,5,'available'),
+(11,'generator Deb2','generator', 'stanley',84.32,7,'available'),
+(12,'forklift 21-C','forklift', 'hyster',114.25,12,'available'),
+(13,'forklift 72','forklift', 'linde',140.00,11,'available'),
+(14,'jackhammer daisy','jackhammer', 'makita',45.00,18,'available'),
+(15,'jackhammer C4ZYG4Y','jackhammer', 'bosch',65.50,24,'available');
 
 
 

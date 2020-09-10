@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+
+<head>
+    <title>Show Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h2>Your Cart</h2>
+
+<form action="/user/showcart"  th:method="post" th:object="${pendingEquipments}" >
+    <table>
+        <thead>
+        <tr>
+            <th> Name </th>
+            <th> Type </th>
+            <th> Price </th>
+            <th> Quantity </th>
+            <th> Mark </th>
+            <th> Status </th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Table Inscriptions -->
+        <tr th:each="equipments : ${pendingEquipments}">
+            <td   th:text="${equipments.equipment.eqName}"> Name</td>
+            <td  th:text="${equipments.equipment.eqType}"> Type </td>
+            <td  th:text="${equipments.equipment.price}"> Price&nbsp;&nbsp; </td>
+            <td  th:text="${equipments.equipment.quantity}"> Quantity</td>
+            <td  th:text="${equipments.equipment.eqMark}"> Mark</td>
+            <td  th:text="${equipments.equipment.status}"> Status </td>
+<!--            <td><a th:href="'/user/addtocart/'+${equipment.id}">-->
+<!--                <input type="button" value="Send to Confirm"><br>-->
+<!--            </a></td>-->
+        </tr>
+        </tbody>
+    </table>
+    <a  href="/user/showcart/confirm">
+        <input type="button" value="Submit">
+    </a>
+<!--    <a href="/user/showcart/" >-->
+<!--        <input type="button" value="Your cart">-->
+<!--    </a>-->
+
+
+</form>
+</body>
+</html>
+

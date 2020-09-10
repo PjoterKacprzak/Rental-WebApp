@@ -3,14 +3,23 @@ package com.webapp.rentalapp.model;
 
 import javax.persistence.*;
 
+
+
 @Entity
 @Table(name = "equipments")
 public class Equipment {
 
+    public enum EquipmentStatus
+    {
+        available,
+        pending,
+        not_available,
+        in_cart,
+        accepted
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
-
+    private long id;
     @Column(name = "eq_name")
     private String eqName;
     @Column(name = "eq_type")
@@ -21,6 +30,10 @@ public class Equipment {
     private double price;
     @Column(name = "quantity")
     private String quantity;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EquipmentStatus status;
+
 
     public String getEqName() {
         return eqName;
@@ -60,5 +73,34 @@ public class Equipment {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public EquipmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EquipmentStatus status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipment{" +
+                "Id=" + id +
+                ", eqName='" + eqName + '\'' +
+                ", eqType='" + eqType + '\'' +
+                ", eqMark='" + eqMark + '\'' +
+                ", price=" + price +
+                ", quantity='" + quantity + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        id = id;
     }
 }

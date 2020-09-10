@@ -13,13 +13,10 @@ import java.util.Optional;
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findByUsername(String username);
 
-//    @Override
-//    Optional<Client> findById(Long aLong);
-//    @Query(value = "select id From clients t WHERE t.id IN :ids")
-////         Client findByIdsIn(@Param("ids")Long ids);
 
     @Query("SELECT username FROM Client u WHERE u.id = ?1")
     String findByIds(Long id);
+
 
 
     @Transactional

@@ -32,7 +32,12 @@
         <td><span th:text="${client.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>
         <td><span th:text="${client.telephone}"> Telephone </span></td>
         <td><span th:text="${client.roles}"> Roles </span></td>
-        <td><a th:href="'/editUsers/'+${client.username}">Edit</a></td>
+        <td><a th:href="'/editUsers/'+${client.username}">
+            <input type="button" value="Edit"><br>
+        </a></td>
+        <td><a th:href="'/addtocart/'+${client.username}">
+            <input type="button" value="Delete"><br>
+        </a></td>
 <!--        <td><span th:text="${client.authorities}"> Authorities </span></td>&ndash;&gt;-->
     </tr>
     </tbody>

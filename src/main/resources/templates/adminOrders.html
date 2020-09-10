@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+
+<head>
+    <title>Show Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h2>Your Cart</h2>
+
+<form   th:method="post" th:object="${orders}" >
+    <table>
+        <thead>
+        <tr>
+            <th> Client Name</th>
+            <th> Name </th>
+            <th> Type </th>
+            <th> Price </th>
+            <th> Quantity </th>
+            <th> Mark </th>
+            <th> Status </th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Table Inscriptions -->
+        <tr th:each="order : ${orders}">
+            <td  th:text="${order.clientName}">Client Name</td>
+            <td  th:text="${order.equipment.eqName}"> Name</td>
+            <td  th:text="${order.equipment.eqType}"> Type </td>
+            <td  th:text="${order.equipment.price}"> Price&nbsp;&nbsp; </td>
+            <td  th:text="${order.equipment.quantity}"> Quantity</td>
+            <td  th:text="${order.equipment.eqMark}"> Mark</td>
+            <td  th:text="${order.equipment.status}"> Status </td>
+
+            <td><a th:href="'/admin/showDb/orders/confirm/'+${order.id}">
+                <input type="button" value="Confirm"><br>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
+
