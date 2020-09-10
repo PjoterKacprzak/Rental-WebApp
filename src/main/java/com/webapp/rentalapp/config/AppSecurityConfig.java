@@ -47,7 +47,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/templates/**","/login","/welcome","/registration","/static/**","/css/**","/webjars/**","webjars/bootstrap/4.5.2/css/**","/webjars/jquery/3.5.1/**","/webjars/bootstrap/4.5.2/js/**","/webjars/popper.js/1.16.1/dist/umd/**").permitAll()
+                .authorizeRequests().antMatchers("/resources/**","/login","/welcome","/registration","/static/**","/css/**","/webjars/**").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
