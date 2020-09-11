@@ -6,14 +6,62 @@
     <title th:text="${title}">test</title>
     <meta charset="UTF-8"/>
     <meta http-equiv="U-XA-Comaptible" content="IE=egde,chrome=1"/>
-    <link rel="stylesheet" href="webjars/bootstrap/4.5.2/css/bootstrap.min.css"/>
-    <script src="webjars/jquery/3.5.1/jquery.slim.min.js" type="text/javascript"></script>
-    <script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="webjars/popper.js/1.16.1/dist/umd/popper.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.slim.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/popper.js/1.16.1/dist/umd/popper.min.js}" type="text/javascript"></script>
     <link rel="stylesheet" href="/css/style.css" type="text/css" />
 </head>
 
 <body>
+<div th:fragment="navbar-user" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">Equipment Rental</a>
+    <button class="navbar-toggler">
+        <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#navbarDropdown"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a th:href="'/editUsers/'+${username}" class="nav-link">Edit profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/showdb" class="nav-link">Rent</a>
+            </li>
+            <li class="nav-item">
+                <a href="/user/showcart" class="nav-link">Cart</a>
+            </li>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment="navbar-admin" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">Equipment Rental</a>
+    <button class="navbar-toggler">
+        <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#navbarDropdownAdmin"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarDropdownAdmin">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Edit profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/showDb" class="nav-link">DB</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/showDb/orders" class="nav-link">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/showUsers" class="nav-link">Show users</a>
+            </li>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</div>
     <p th:fragment="footer">
 
     </p>

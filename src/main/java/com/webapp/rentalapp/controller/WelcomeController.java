@@ -59,11 +59,12 @@ public class WelcomeController {
 
 		logger.info(String.valueOf(request.isUserInRole("ROLE_ADMIN")));
 
-		logger.info(String.valueOf(request.getUserPrincipal()));
+		logger.info(String.valueOf(request.getRemoteUser()));
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			model.addAttribute("title","Admin Page");
 			return "adminPage";
 		} else {
+			model.addAttribute("username",request.getRemoteUser());
 			model.addAttribute("title","Welcome User");
 			return "welcome";
 		}

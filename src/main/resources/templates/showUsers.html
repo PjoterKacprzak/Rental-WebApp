@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<div th:replace="template :: navbar-admin"></div>
 <h2>List of Users</h2>
 <table>
     <thead>
@@ -37,7 +38,7 @@
     </tbody>
 </table>
 <form action="/admin/showUser/newUser" method="get" >
-    <button name="addUser" type="submit" value="addUser">Add new User</button>
+    <button name="addUser" class="btn btn-danger" type="submit" value="addUser">Add new User</button>
 </form>
 <form action="/logout" method="get" >
     <button name="Logout" type="submit" value="Logout">Logout</button>
