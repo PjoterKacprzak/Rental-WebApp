@@ -2,23 +2,45 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template :: header">
-</head>
+<head th:replace="template :: header"></head>
 
 <body>
-<div>
-    <h1>Add new User</h1>
-    <form action="#" th:action="@{/admin/showUser/newUser/confirm}" th:object="${newClient}"
-          method="post">
-        UserName&nbsp;&nbsp; <input type="text" th:field="*{username}"/><br>
-        Password&nbsp;&nbsp; <input type="text" th:field="*{password}"/><br>
-        E-Mail&nbsp;&nbsp;&nbsp;<input type="text" th:field="*{email}"/><br>
-        Adress&nbsp;&nbsp;&nbsp;<input type="text" th:field="*{adress}"/><br>
-        Telephone&nbsp;&nbsp;<input type="text" th:field="*{telephone}"/><br>
-        Role(admin/user)&nbsp;&nbsp;<input type="text" name="role"/><br>
-        <button type="submit">Save</button>
-    </form>
+<div th:replace="template :: navbar-admin"></div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-8 col-xs-10">
+        <h2 class="text-center header-line">New User</h2>
+        <div class="card my-card">
+            <div class="card-header text-center my-card-header">Create profile </div>
+            <div class="card-body">
+                <div th:fragment="content">
+                    <form action="#" th:action="@{/admin/showUser/newUser/confirm}" th:object="${newClient}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Username" required autocomplete="off" th:field="*{username}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" id="" name="password" placeholder="Password" required autocomplete="off" th:field="*{password}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" id="email" name="email" placeholder="E-mail" required autocomplete="off" th:field="*{email}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="adress" name="adress" placeholder="Adress" required autocomplete="off" th:field="*{adress}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="telephone" name="telephone" placeholder="Telephone" required autocomplete="off" th:field="*{telephone}"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="role" name="role" placeholder="Role (admin/user)" required autocomplete="off"  th:field="*{roles}"/>
+                        </div>
+                        <button type="submit" name="add" class="btn btn-info">Add user</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div th:replace="template :: footer"></div>
 </body>
 </html>

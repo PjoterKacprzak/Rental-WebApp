@@ -1,17 +1,85 @@
 body{
     background-color: rgb(104, 104, 104);
 }
+a:link{
+    text-decoration: none!important;
+}
 
 .my-card{
     margin-top: 50px;
     background-color: rgb(94, 94, 94);
+}
+.colorText{
+    color: white;
 }
 
 .my-card-header{
     background-color: rgb(64, 64, 64);
     color: white;
 }
+
 .header-line{
     margin-top: 40px;
     color: white;
+}
+
+.icon-size{
+    font-size: 120px;
+}
+
+#logout-icon{
+    background-color: red;
+    color: white;
+}
+#logout-card{
+    background-color: darkred;
+    color: white;
+}
+#profile-icon{
+    background-color: #0090ff;
+    color: white;
+}
+#profile-card{
+    background-color: #0458ff;
+    color: white;
+}
+
+#rent-icon{
+    background-color: green;
+    color: white;
+}
+#rent-card{
+    background-color: darkgreen;
+    color: white;
+}
+#newUser-icon{
+    background-color: mediumpurple;
+    color: white;
+}
+#newUser-card{
+    background-color: rebeccapurple;
+    color: white;
+}
+#cart-icon{
+    background-color: #dbdb01;
+    color: white;
+}
+#cart-card{
+    background-color: #929200;
+    color: white;
+}
+
+.footer{
+    background-color: rgb(67, 67, 67);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+.moving-card{
+}
+.moving-card:hover{
+    transform: scale(1.07);
+    transition: 0.3s;
 }

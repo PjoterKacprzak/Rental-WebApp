@@ -8,19 +8,48 @@
 
 <body>
 <div th:replace="template :: navbar-user"></div>
-<form action="/user/showdb" method="get" >
-		<button name="showDB" type="submit" value="showDB">Things u Can Rent!</button>
-	</a>
-</form>
-
-
-<form action="/logout" method="get" >
-		<button name="Logout" type="submit" value="Logout">Logout</button>
-</form>
-<div id="button">
-	<a href="/editUser">
-		<button>Edit</button>
-	</a>
+<div class="container">
+	<h2 class="text-center header-line" th:text="'Welcome, '+${username}+'!'"></h2>
+	<div class="row justify-content-around">
+		<div class="col-lg-3 col-sm-5 col-xs-8 ">
+			<a href="/editProfile" style="text-decoration:none;">
+			<div class="card my-card text-center moving-card">
+				<div class="card-header" id="profile-icon"><span class="fa fa-user icon-size" aria-hidden="true"></span></div>
+				<div class="card-body" id="profile-card">Edit Profile</div>
+			</div>
+			</a>
+		</div>
+		<div class="col-lg-3 col-sm-5 col-xs-8 ">
+			<a href="/user/showdb">
+			<div class="card my-card text-center moving-card">
+				<div class="card-header" id="rent-icon"><span class="fa fa-shopping-bag icon-size" aria-hidden="true"></span></div>
+				<div class="card-body" id="rent-card">Rent</div>
+			</div>
+			</a>
+		</div>
+		<div class="col-lg-3 col-sm-5 col-xs-8 ">
+			<a href="/user/showcart">
+			<div class="card my-card text-center moving-card">
+				<div class="card-header" id="cart-icon"><span class="fa fa-shopping-cart icon-size" aria-hidden="true"></span></div>
+				<div class="card-body"id="cart-card">
+					Your cart
+				</div>
+			</div>
+			</a>
+		</div>
+		<div class="col-lg-3 col-sm-5 col-xs-8 ">
+			<a href="/logout">
+			<div class="card my-card text-center moving-card">
+				<div class="card-header " id="logout-icon"><span class="fa fa-sign-out icon-size" aria-hidden="true"></span></div>
+				<div class="card-body" id="logout-card">
+					Logout
+				</div>
+			</div>
+			</a>
+		</div>
+	</div>
 </div>
+
+<div th:replace="template :: footer"></div>
 </body>
 </html>

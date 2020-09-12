@@ -7,42 +7,43 @@
 
 <body>
 <div th:replace="template :: navbar-admin"></div>
-<h2>List of Users</h2>
-<table>
-    <thead>
-    <tr>
-        <th> Name </th>
-        <th> Email </th>
-        <th> Adress </th>
-        <th> Telephone </th>
-        <th> Roles </th>
-<!--        <th> Authorities </th>-->
-    </tr>
-    </thead>
-    <tbody>
+<div class="row justify-content-center">
+    <div class="col-sm-10 col-xs-10">
+        <h2 class="text-center header-line">List of Users</h2>
+        <div class="card my-card">
+            <div class="card-header text-center my-card-header">Users</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover table-borderless colorText">
+                        <thead>
+                        <tr>
+                            <th scope="col"> Name </th>
+                            <th scope="col"> Email </th>
+                            <th scope="col"> Adress </th>
+                            <th scope="col"> Telephone </th>
+                            <th scope="col"> Roles </th>
+                            <th scope="col"> Actions </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="client : ${clients}">
+                            <th scope="row"><span th:text="${client.username}"> Name </span></th>
+                            <td><span th:text="${client.email}"> Email </span></td>
+                            <td><span th:text="${client.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>
+                            <td><span th:text="${client.telephone}"> Telephone </span></td>
+                            <td><span th:text="${client.roles}"> Roles </span></td>
+                            <td><a th:href="'/editUsers/'+${client.username}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                            <td><a th:href="'/deleteUser/'+${client.username}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <tr th:each="client : ${clients}">
-        <td><span th:text="${client.username}"> Name </span></td>
-        <td><span th:text="${client.email}"> Email </span></td>
-        <td><span th:text="${client.adress}"> Adress&nbsp;&nbsp;&nbsp; </span></td>
-        <td><span th:text="${client.telephone}"> Telephone </span></td>
-        <td><span th:text="${client.roles}"> Roles </span></td>
-        <td><a th:href="'/editUsers/'+${client.username}">
-            <input type="button" value="Edit"><br>
-        </a></td>
-        <td><a th:href="'/addtocart/'+${client.username}">
-            <input type="button" value="Delete"><br>
-        </a></td>
-<!--        <td><span th:text="${client.authorities}"> Authorities </span></td>&ndash;&gt;-->
-    </tr>
-    </tbody>
-</table>
-<form action="/admin/showUser/newUser" method="get" >
-    <button name="addUser" class="btn btn-danger" type="submit" value="addUser">Add new User</button>
-</form>
-<form action="/logout" method="get" >
-    <button name="Logout" type="submit" value="Logout">Logout</button>
-</form>
+<div th:replace="template :: footer"></div>
 </body>
 </html>
 

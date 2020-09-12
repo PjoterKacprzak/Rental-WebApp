@@ -8,44 +8,48 @@
 
 <body>
 <div th:replace="template :: navbar-user"></div>
+<div class="row justify-content-center">
+    <div class="col-xs-10 col-sm-10">
+        <h2 class="text-center header-line">text</h2>
+        <div class="card my-card">
+            <div class="card-header text-center my-card-header">text</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form <form th:method="post">
+                    <table class="table table-hover table-borderless colorText">
+                        <thead>
+                        <tr>
+                            <th scope="col"> Name </th>
+                            <th scope="col"> Type </th>
+                            <th scope="col"> Price </th>
+                            <th scope="col"> Quantity </th>
+                            <th scope="col"> Mark </th>
+                            <th scope="col"> Status </th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-<h2>Things u Can Rent</h2>
+                        <tr th:each="equipment : ${equipments}">
+                            <td <span  th:text="${equipment.eqName}"> Name</span></td>
+                            <td <span th:text="${equipment.eqType}"> Type</span> </td>
+                            <td <span th:text="${equipment.price}"> Price&nbsp;&nbsp;&nbsp;</span> </td>
+                            <td <span th:text="${equipment.quantity}"> Quantity</span></td>
+                            <td <span th:text="${equipment.eqMark}"> Mark </span></td>
+                            <td <span th:text="${equipment.status}"> Status </span></td>
+                            <td><a th:href="'/user/addtocart/'+${equipment.id}">
+                                <input type="button" class="btn btn-primary" value="Add to Cart"><br>
+                            </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form th:method="post"
-name="variable">
-    <table>
-        <thead>
-        <tr>
-                    <th> Name </th>
-                    <th> Type </th>
-                    <th> Price </th>
-                    <th> Quantity </th>
-                    <th> Mark </th>
-                    <th> Status </th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Table Inscriptions -->
-        <tr th:each="equipment : ${equipments}">
-            <td <span  th:text="${equipment.eqName}"> Name</span></td>
-            <td <span th:text="${equipment.eqType}"> Type</span> </td>
-            <td <span th:text="${equipment.price}"> Price&nbsp;&nbsp;&nbsp;</span> </td>
-            <td <span th:text="${equipment.quantity}"> Quantity</span></td>
-            <td <span th:text="${equipment.eqMark}"> Mark </span></td>
-            <td <span th:text="${equipment.status}"> Status </span></td>
-            <td><a th:href="'/user/addtocart/'+${equipment.id}">
-                <input type="button" value="Add to Cart"><br>
-            </a></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a href="/user/showcart/" >
-        <input type="button" value="Your cart">
-    </a>
-
-
-</form>
+<div th:replace="template :: footer"></div>
 </body>
 </html>
 

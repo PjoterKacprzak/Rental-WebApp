@@ -61,6 +61,7 @@ public class WelcomeController {
 
 		logger.info(String.valueOf(request.getRemoteUser()));
 		if (request.isUserInRole("ROLE_ADMIN")) {
+			model.addAttribute("username",request.getRemoteUser());
 			model.addAttribute("title","Admin Page");
 			return "adminPage";
 		} else {
@@ -111,6 +112,16 @@ public class WelcomeController {
 		return "rentalDB";
 	}
 
+	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+	public String editSingleUser(SecurityContextHolderAwareRequestWrapper request, Model model) {
+
+		Client client = clientRepository.findByUsername(request.getRemoteUser());
+		model.addAttribute("getClient", client);
+		model.addAttribute("title", "Edit user");
+		logger.info(String.valueOf(model));
+		return "editProfile";
+	}
+
 	@RequestMapping(value = "user/addtocart/{id}",method = RequestMethod.GET)
 	public String addToCart(@PathVariable Long id, Model model, Authentication authentication)
 	{
@@ -144,7 +155,7 @@ public class WelcomeController {
 
 
 		List<Order> ordersInCart = orderRepository.findAllByStatusInCart(authentication.getName());
-Order order;
+		Order order;
 		Long id;
 		for(int i=0;i<ordersInCart.size();i++)
 		{
@@ -201,7 +212,6 @@ Order order;
 		if (string.getEmail() != "") {
 			clientRepository.saveEmail(string.getEmail(), id);
 		}
-
 		return "redirect:/";
 	}
 

@@ -2,52 +2,51 @@
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 
-<head>
-    <title>Show Users</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<head th:replace="template :: header"></head>
 
 <body>
+<div th:replace="template :: navbar-user"></div>
+<div class="row justify-content-center">
+    <div class="col-xs-10 col-sm-10">
+        <h2 class="text-center header-line">Manage Orders</h2>
+        <div class="card my-card">
+            <div class="card-header text-center my-card-header">Orders</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form action="/user/showcart"  th:method="post" th:object="${pendingEquipments}" >
+                        <table class="table table-hover table-borderless colorText">
+                            <thead>
+                            <tr>
+                                <th scope="col"> Name </th>
+                                <th scope="col"> Type </th>
+                                <th scope="col"> Price </th>
+                                <th scope="col"> Quantity </th>
+                                <th scope="col"> Mark </th>
+                                <th scope="col"> Status </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="equipments : ${pendingEquipments}">
+                                <th scope="row" th:text="${equipments.equipment.eqName}"> Name</td>
+                                <td  th:text="${equipments.equipment.eqType}"> Type </td>
+                                <td  th:text="${equipments.equipment.price}"> Price&nbsp;&nbsp; </td>
+                                <td  th:text="${equipments.equipment.quantity}"> Quantity</td>
+                                <td  th:text="${equipments.equipment.eqMark}"> Mark</td>
+                                <td  th:text="${equipments.equipment.status}"> Status </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a  href="/user/showcart/confirm">
+                            <button type="button" class="btn btn-success -align-right" >Submit</button>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Your Cart</h2>
-
-<form action="/user/showcart"  th:method="post" th:object="${pendingEquipments}" >
-    <table>
-        <thead>
-        <tr>
-            <th> Name </th>
-            <th> Type </th>
-            <th> Price </th>
-            <th> Quantity </th>
-            <th> Mark </th>
-            <th> Status </th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Table Inscriptions -->
-        <tr th:each="equipments : ${pendingEquipments}">
-            <td   th:text="${equipments.equipment.eqName}"> Name</td>
-            <td  th:text="${equipments.equipment.eqType}"> Type </td>
-            <td  th:text="${equipments.equipment.price}"> Price&nbsp;&nbsp; </td>
-            <td  th:text="${equipments.equipment.quantity}"> Quantity</td>
-            <td  th:text="${equipments.equipment.eqMark}"> Mark</td>
-            <td  th:text="${equipments.equipment.status}"> Status </td>
-<!--            <td><a th:href="'/user/addtocart/'+${equipment.id}">-->
-<!--                <input type="button" value="Send to Confirm"><br>-->
-<!--            </a></td>-->
-        </tr>
-        </tbody>
-    </table>
-    <a  href="/user/showcart/confirm">
-        <input type="button" value="Submit">
-    </a>
-<!--    <a href="/user/showcart/" >-->
-<!--        <input type="button" value="Your cart">-->
-<!--    </a>-->
-
-
-</form>
+<div th:replace="template :: footer"></div>
 </body>
 </html>
 

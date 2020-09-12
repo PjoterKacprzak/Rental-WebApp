@@ -5,12 +5,12 @@
 <head th:replace="template :: header"></head>
 
 <body>
-<div th:replace="template :: navbar-admin"></div>
+<div th:replace="template :: navbar-user"></div>
 <div class="row justify-content-center">
     <div class="col-md-6 col-sm-8 col-xs-10">
-        <h2 class="text-center header-line">New User</h2>
+        <h2 class="text-center header-line">Edit Profile</h2>
         <div class="card my-card">
-            <div class="card-header text-center my-card-header">Create profile </div>
+            <div class="card-header text-center my-card-header">Profile </div>
             <div class="card-body">
                 <div th:fragment="content">
                     <form action="#" th:action="@{/updateUser}" th:object="${getClient}" method="post">
@@ -18,19 +18,19 @@
                             <input class="form-control" type="hidden" id="id" name="id" th:field="*{id}"/>
                         </div>
                         <div class="form-group">
-                            <label for="username"class="colorText">Username</label>
+                            <label for="username" class="colorText">Username</label>
                             <input class="form-control" type="text" id="username" name="username"th:field="*{username}"/>
                         </div>
                         <div class="form-group">
-                            <label for="password"class="colorText">Password</label>
+                            <label for="password" class="colorText">Password</label>
                             <input class="form-control" type="text" id="password" name="password" th:field="*{password}"/>
                         </div>
                         <div class="form-group">
-                            <label for="email"class="colorText">E-mail</label>
+                            <label for="email" class="colorText">E-mail</label>
                             <input class="form-control" type="text" id="email" name="email" th:field="*{email}"/>
                         </div>
                         <div class="form-group">
-                            <label for="adress"class="colorText">Adress</label>
+                            <label for="adress" class="colorText">Adress</label>
                             <input class="form-control" type="text" id="adress" name="adress" th:field="*{adress}"/>
                         </div>
                         <div class="form-group">
