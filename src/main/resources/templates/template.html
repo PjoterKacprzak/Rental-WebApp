@@ -37,7 +37,6 @@
         </ul>
     </div>
 </div>
-
 <div th:fragment="navbar-admin" class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a href="/" class="navbar-brand">Equipment Rental</a>
     <button class="navbar-toggler">
@@ -46,13 +45,13 @@
     <div class="collapse navbar-collapse" id="navbarDropdownAdmin">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="/admin/showDb" class="nav-link">DB</a>
+                <a href="/admin/showDb" class="nav-link">View Products</a>
             </li>
             <li class="nav-item">
                 <a href="/admin/showDb/orders" class="nav-link">Orders</a>
             </li>
             <li class="nav-item">
-                <a href="/admin/showUsers" class="nav-link">Show users</a>
+                <a href="/admin/showUsers" class="nav-link">Manage Users</a>
             </li>
             <li class="nav-item">
                 <a href="/admin/showUser/newUser" class="nav-link">Add user</a>
@@ -64,26 +63,29 @@
         </ul>
     </div>
 </div>
-    <div th:fragment="footer" class="footer">
-<!--        <div class="row text-center">-->
-<!--            <div class="col-md-4">-->
-<!--                <span><strong>&copy 2020 Copyright:</strong></span><br>-->
-<!--                <span>Created by: Piotr Kacprzak & Maciej Gabryszewski</span>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <p><strong>Kontakt: </strong><br>-->
-<!--                Maciej Gabryszewski, Telephone: 864-645-433<br>-->
-<!--                Piotr Kacprzak, Telephone:765-234-865-->
-<!--                </p>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <p><strong>Adress:</strong><br>-->
-<!--                construction-equipment-rental.com<br>-->
-<!--                Ul. Nowatorska 234 lok.23<br>-->
-<!--                12-345 Warszawa, Polska-->
-<!--                </p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+        <footer class="footer" th:fragment="footer">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span><strong>&copy 2020 Copyright:</strong><br>
+                        Created by: Piotr Kacprzak & Maciej Gabryszewski</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span><strong>Kontakt: </strong><br>
+                            Maciej Gabryszewski, Telephone: 864-645-433<br>
+                            Piotr Kacprzak, Telephone:765-234-865
+                        </span>
+                    </div>
+                    <div class="col-md-4">
+                        <span><strong>Adress:</strong><br>
+                            construction-equipment-rental.com<br>
+                            Ul. Nowatorska 234 lok.23<br>
+                            12-345 Warszawa, Polska
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
 </body>
 </html>
